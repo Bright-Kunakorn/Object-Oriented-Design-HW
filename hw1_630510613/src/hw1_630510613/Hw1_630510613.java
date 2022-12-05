@@ -10,14 +10,14 @@ public class Hw1_630510613 {
      * @param args the command line arguments
      */
     public static void main(String[] args) { 
-        double[] myNum1 = {80, 75, 70, 60 , 50};
-        double[] myNum2 = {75, 70, 65, 60 , 40};
+        double[] scales1 = {80, 75, 70, 60 , 50}; //Scale Course
+        double[] scales2 = {75, 70, 65, 60 , 40};
         // double[] myNum3 = {70, 65, 60, 53 , 30};
 
         Student obj = new Student("Kunakorn Topurin", "Computer") {};
 
-        obj.addCourse(new ScaleCourse("c100", 4, myNum1),75.0);
-        obj.addCourse(new ScaleCourse("c102", 3, myNum2),65.0);
+        obj.addCourse(new ScaleCourse("c100", 4, scales1),75.0);
+        obj.addCourse(new ScaleCourse("c102", 3, scales2),65.0);
         obj.addCourse(new SatisfactoryCourse("c104", 3, 50),50.0);
 
         obj.printTranscript();
@@ -30,7 +30,7 @@ abstract class Student {
     private double[] RawGrade = new double[4];
     private String name;
     private String major;
-    private int index = 0;
+    private int index = 0; 
     
     //constructor
     public Student(String name,String major){
@@ -95,8 +95,7 @@ abstract class Student {
 
             }
             else
-                break;
-                
+                break;    
         }
         System.out.println("Total Credits:"+ getSumCredit());
         System.out.printf("Overall GPA: %.2f", (gpa/calCredit));
@@ -123,8 +122,8 @@ class Course {
     public Course() {
     }
     //operation
-    public String getFinalLetterGrade(double grade){
-        return type;
+    public String getFinalLetterGrade(double grade){ //Not use this function
+        return "";
     }
     public String getType(){
         return type;
@@ -138,7 +137,6 @@ class Course {
 }
 class ScaleCourse extends Course{
     public double[] scales = new double[5];
-    private String letterGrade;
 
     public ScaleCourse(String name,int credit,double[] scales){
         setCredit(credit);
@@ -146,7 +144,8 @@ class ScaleCourse extends Course{
         this.scales = scales;
     }
 
-    public String getFinalLetterGrade(double grade){
+    @Override public String getFinalLetterGrade(double grade){
+        String letterGrade = "";
         if (grade >= scales[0])
             letterGrade = "A";
         else if (grade >= scales[1])
@@ -159,13 +158,12 @@ class ScaleCourse extends Course{
             letterGrade = "F";
         return letterGrade;
     }
-    public String getType(){
+    @Override public String getType(){
         return "Scale";
     }
 }
 class SatisfactoryCourse extends Course{
     private double threshold;
-    private String letterGrade;
 
     public SatisfactoryCourse(String name,int credit,double threshold){
         this.threshold = threshold;
@@ -173,15 +171,24 @@ class SatisfactoryCourse extends Course{
         setName(name);
     }
 
-    public String getType(){
+    @Override public String getType(){
         return "S/U  ";
     }
-    public String getFinalLetterGrade(double grade){
+    @Override public String getFinalLetterGrade(double grade){
+        String letterGrade;
         if (grade >= threshold)
             letterGrade = "S";
         else
             letterGrade = "U";
         return letterGrade;
+    }
+
+    public double getThreshold() {
+        return threshold;
+    }
+
+    public void setThreshold(double threshold) {
+        this.threshold = threshold;
     }
 }
 
