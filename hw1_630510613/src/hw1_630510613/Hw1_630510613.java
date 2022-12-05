@@ -12,13 +12,13 @@ public class Hw1_630510613 {
     public static void main(String[] args) { 
         double[] myNum1 = {80, 75, 70, 60 , 50};
         double[] myNum2 = {75, 70, 65, 60 , 40};
-        double[] myNum3 = {70, 65, 60, 53 , 30};
+        // double[] myNum3 = {70, 65, 60, 53 , 30};
 
         Student obj = new Student("Kunakorn Topurin", "Computer") {};
 
-        obj.addCourse(new ScaleCourse("c100", 3, myNum1),20.0);
-        obj.addCourse(new ScaleCourse("c102", 3, myNum2),80.0);
-        obj.addCourse(new ScaleCourse("c103", 3, myNum3),60.0);
+        obj.addCourse(new ScaleCourse("c100", 4, myNum1),75.0);
+        obj.addCourse(new ScaleCourse("c102", 3, myNum2),65.0);
+        obj.addCourse(new SatisfactoryCourse("c104", 3, 50),50.0);
 
         obj.printTranscript();
     }   
@@ -68,18 +68,39 @@ abstract class Student {
         ++index;
     }
     public void printTranscript(){
+        double gpa = 0 ;
+        int calCredit = 0;
+        double nGrade = 0;
         System.out.println("Name: "+ getName());
         System.out.println("Major: "+ getMajor());
         System.out.println("Courses Taken: ");
         for (int i = 0; i < courses.length; i++) {
             if (courses[i] != null)
                 System.out.println(courses[i].getName() +" "+ (RawGrade[i]) +" "+ courses[i].getCredit()+" "
-                +(courses[i].getFinalLetterGrade(RawGrade[i])));
+                +(courses[i].getFinalLetterGrade(RawGrade[i])+ " "+ courses[i].getType()));
+            if (courses[i].getType() == "Scale") {
+                if (courses[i].getFinalLetterGrade(RawGrade[i]) == "A") 
+                    nGrade = 4.0;
+                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "B")
+                    nGrade = 3.0;
+                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "C") 
+                    nGrade = 2.0;
+                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "D") 
+                    nGrade = 1.0;
+                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "F") 
+                    nGrade = 0.0;
+
+                gpa += ((nGrade)*courses[i].getCredit())/courses[i].getCredit();
+                System.out.println(((nGrade)*courses[i].getCredit())/courses[i].getCredit());
+                calCredit += courses[i].getCredit();
+
+            }
             else
                 break;
         }
         System.out.println("Total Credits:"+ getSumCredit());
-        System.out.println("Overall GPA:"+ getSumGrade()/getSumCredit());
+        System.out.println("Overall GPA:"+ gpa);
+        System.out.println("Overall GPA:"+ calCredit);
     }
 }
 
@@ -139,7 +160,7 @@ class ScaleCourse extends Course{
         return letterGrade;
     }
     public String getType(){
-        return letterGrade;
+        return "Scale";
     }
 }
 class SatisfactoryCourse extends Course{
@@ -153,7 +174,7 @@ class SatisfactoryCourse extends Course{
     }
 
     public String getType(){
-        return letterGrade;
+        return "S/U";
     }
     public String getFinalLetterGrade(double grade){
         if (grade >= threshold)
@@ -163,5 +184,4 @@ class SatisfactoryCourse extends Course{
         return letterGrade;
     }
 }
-
 
