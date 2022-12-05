@@ -76,8 +76,8 @@ abstract class Student {
         System.out.println("Courses Taken: ");
         for (int i = 0; i < courses.length; i++) {
             if (courses[i] != null)
-                System.out.println(courses[i].getName() +" "+ (RawGrade[i]) +" "+ courses[i].getCredit()+" "
-                +(courses[i].getFinalLetterGrade(RawGrade[i])+ " "+ courses[i].getType()));
+                System.out.println(courses[i].getName() + " " + courses[i].getType() + " " + courses[i].getCredit() 
+                + " "+ (RawGrade[i]) + " " + (courses[i].getFinalLetterGrade(RawGrade[i])));
             if (courses[i].getType() == "Scale") {
                 if (courses[i].getFinalLetterGrade(RawGrade[i]) == "A") 
                     nGrade = 4.0;
@@ -90,17 +90,17 @@ abstract class Student {
                 else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "F") 
                     nGrade = 0.0;
 
-                gpa += ((nGrade)*courses[i].getCredit())/courses[i].getCredit();
-                System.out.println(((nGrade)*courses[i].getCredit())/courses[i].getCredit());
+                gpa += ((nGrade)*courses[i].getCredit());
                 calCredit += courses[i].getCredit();
 
             }
             else
                 break;
+                
         }
         System.out.println("Total Credits:"+ getSumCredit());
-        System.out.println("Overall GPA:"+ gpa);
-        System.out.println("Overall GPA:"+ calCredit);
+        System.out.printf("Overall GPA: %.2f", (gpa/calCredit));
+
     }
 }
 
@@ -174,7 +174,7 @@ class SatisfactoryCourse extends Course{
     }
 
     public String getType(){
-        return "S/U";
+        return "S/U  ";
     }
     public String getFinalLetterGrade(double grade){
         if (grade >= threshold)
