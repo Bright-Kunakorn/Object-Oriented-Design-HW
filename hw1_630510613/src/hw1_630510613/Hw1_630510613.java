@@ -78,17 +78,25 @@ abstract class Student {
             if (courses[i] != null)
                 System.out.println(courses[i].getName() + " " + courses[i].getType() + " " + courses[i].getCredit() 
                 + " "+ (RawGrade[i]) + " " + (courses[i].getFinalLetterGrade(RawGrade[i])));
+            
             if (courses[i].getType() == "Scale") {
-                if (courses[i].getFinalLetterGrade(RawGrade[i]) == "A") 
-                    nGrade = 4.0;
-                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "B")
-                    nGrade = 3.0;
-                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "C") 
-                    nGrade = 2.0;
-                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "D") 
-                    nGrade = 1.0;
-                else if (courses[i].getFinalLetterGrade(RawGrade[i]) == "F") 
-                    nGrade = 0.0;
+                switch (courses[i].getFinalLetterGrade(RawGrade[i])) {
+                    case "A":
+                        nGrade = 4.0;
+                        break;
+                    case "B":
+                        nGrade = 3.0;
+                        break;
+                    case "C":
+                        nGrade = 2.0;
+                        break;
+                    case "D":
+                        nGrade = 1.0;
+                        break;
+                    case "F":
+                        nGrade = 0.0;
+                        break;
+                }
 
                 gpa += ((nGrade)*courses[i].getCredit());
                 calCredit += courses[i].getCredit();
