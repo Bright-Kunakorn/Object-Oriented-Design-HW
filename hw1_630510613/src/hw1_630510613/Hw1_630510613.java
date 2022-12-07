@@ -26,8 +26,8 @@ public class Hw1_630510613 {
 
 abstract class Student {
     //Attribute
-    private Course[] courses = new Course[4];
-    private double[] RawGrade = new double[4];
+    private Course[] courses = new Course[10];
+    private double[] RawGrade = new double[10];
     private String name;
     private String major;
     private int index = 0; 
@@ -53,13 +53,6 @@ abstract class Student {
                 break;
         }
         return sumCredit;
-    }
-    public double getSumGrade(){
-        double SumGrade = 0;
-        for (Double elem : RawGrade) {
-            SumGrade += elem;
-        }
-        return SumGrade;
     }
     //operator
     public void addCourse(Course course,double grade){
@@ -193,10 +186,6 @@ class SatisfactoryCourse extends Course{
 
     public double getThreshold() {
         return threshold;
-    }
-
-    public void setThreshold(double threshold) {
-        this.threshold = threshold;
     }
 }
 
