@@ -188,4 +188,3 @@ class SatisfactoryCourse extends Course{
         return threshold;
     }
 }
-
