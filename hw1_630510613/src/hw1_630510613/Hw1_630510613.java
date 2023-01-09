@@ -1,9 +1,6 @@
 package hw1_630510613;
 
-/**
- *
- * @author bright
- */
+
 public class Hw1_630510613 {
 
     /**
