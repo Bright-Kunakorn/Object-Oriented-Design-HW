@@ -1,6 +1,5 @@
 package hw1_630510613;
 
-
 public class Hw1_630510613 {
 
     /**
